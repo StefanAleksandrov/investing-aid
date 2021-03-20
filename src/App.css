@@ -9,3 +9,11 @@ body,
 .App {
   width: 100vw;
 }
+
+.page-container {
+  width: 100%;
+  height: calc(100vh - 15rem);
+  display: flex;
+  align-items: top;
+  justify-content: center;
+}

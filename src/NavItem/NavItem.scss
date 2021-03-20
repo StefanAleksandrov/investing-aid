@@ -2,20 +2,23 @@
     display: inline;
     text-decoration: none;
     list-style: none;
-    height: 3rem;
 
     .nav-item {
         display: inline;
         margin-left: 30px;
+        padding-bottom: 10px;
 
         a {
             text-decoration: none;
             color: black;
+            cursor: pointer;
+            padding: 15px 10px;
         }
 
         &:hover {
             a {
-                text-decoration: underline;
+                border-bottom: 1px solid black;
+                border-top: 1px solid black;
             }
         }
     }
