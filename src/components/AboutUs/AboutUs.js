@@ -1,4 +1,4 @@
-import './AboutUs.scss'
+import './AboutUs.scss';
 
 export default function Home() {
     return (

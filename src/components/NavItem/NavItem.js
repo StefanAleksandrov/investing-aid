@@ -1,6 +1,6 @@
-import { Component } from 'react'
-import { NavLink } from 'react-router-dom'
-import './NavItem.scss'
+import { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import './NavItem.scss';
 
 export default class NavItem extends Component {
     render() {

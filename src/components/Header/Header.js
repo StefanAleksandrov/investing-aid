@@ -1,8 +1,8 @@
-import { Component } from 'react'
-import { Link } from 'react-router-dom'
-import './Header.scss'
+import { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Header.scss';
 
-import NavItem from '../NavItem/NavItem'
+import NavItem from '../NavItem/NavItem';
 
 export default class PageHeader extends Component {
     constructor(props) {

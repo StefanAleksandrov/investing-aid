@@ -3,17 +3,29 @@ import { useState, useEffect } from 'react';
 import './Home.scss';
 
 export default function Home() {
-    // const [counter, setCounter] = useState(0);
+    let returnValue = '';
+    const [logged, setLogged] = useState(true);
 
-    function increment() {
-        // setCounter((prev) => prev + 1);
+    useEffect(() => {
+        setTimeout(() => {
+            setLogged((prev) => !prev);
+        }, 2000)
+    }, []);
+
+    if (logged) {
+        returnValue = (
+            <main className='page-container home'>
+                <h1>HODL!</h1>
+            </main>
+        );
+
+    } else {
+        returnValue = (
+            <main className='page-container home'>
+                <h1>I like the <span className='yellow'>STONK!</span></h1>
+            </main>
+        );
     }
 
-    return (
-        <main className='page-container home'>
-            <h1>I like the stock!</h1>
-            {/* <p>{counter}</p> */}
-            {/* <button onClick={increment}>Increment</button> */}
-        </main>
-    );
+    return returnValue;
 }
