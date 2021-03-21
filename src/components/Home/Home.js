@@ -1,11 +1,9 @@
 import './Home.scss'
 
-function Home() {
+export default function Home() {
     return (
         <main className='page-container home'>
-            <h1>Home Page</h1>
+            <h1>Hello World!</h1>
         </main>
-    )
+    );
 }
-
-export default Home;

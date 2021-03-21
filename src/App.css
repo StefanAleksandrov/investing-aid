@@ -12,7 +12,7 @@ body,
 
 .page-container {
   width: 100%;
-  height: calc(100vh - 15rem);
+  height: calc(100vh - 10.5rem);
   padding: 2rem;
   display: flex;
   align-items: top;

@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import './NavItem.scss'
 
-class NavItem extends Component {
+export default class NavItem extends Component {
     render() {
         return (
             <ul className='header-navigation'>
@@ -17,5 +17,3 @@ class NavItem extends Component {
         )
     }
 }
-
-export default NavItem;

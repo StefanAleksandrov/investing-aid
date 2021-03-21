@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import './Footer.scss'
 
-class Footer extends Component {
+export default class Footer extends Component {
     render () {
         return (
             <footer className='footer' >
@@ -10,5 +10,3 @@ class Footer extends Component {
         )
     }
 }
-
-export default Footer
