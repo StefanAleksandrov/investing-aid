@@ -1,0 +1,60 @@
+.sign-up {
+    flex-direction: column;
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1;
+        flex-direction: row;
+        padding: 2rem 5rem;
+        align-items: center;
+
+        img {
+            flex: 1;
+        }
+
+        .form {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 2;
+            padding: 1rem 5rem;
+            border-radius: 1rem;
+            box-shadow: 1px 1px 20px rgb(94, 94, 94);
+    
+            h1 {
+                text-align: center;
+                width: 100%;
+                margin-bottom: 2rem;
+                font-size: 1.6rem;
+            }
+
+            label {
+                padding: 0 2rem;
+                margin: auto;
+                flex-basis: 100%;
+                font-weight: bold;
+
+                * {
+                    padding: 0.75rem 1rem;
+                    margin: 0.5rem 0 2rem;
+                    width: 100%;
+                }
+
+                input:not(:last-of-type) {
+
+                    &:hover {
+                        border: 2px solid #f0d97f;
+                        background-color: #fffefb;
+                        outline: none;
+                    }
+    
+                    &:focus {
+                        border: 2px solid #DBB419;
+                        outline: none;
+                        background-color: #fcfaf3;
+                    }
+                }
+            }
+        }
+    }
+}
