@@ -15,14 +15,14 @@ export default function Home() {
     if (logged) {
         returnValue = (
             <main className='page-container home'>
-                <h1>HODL!</h1>
+                <h1 className="main-title">HODL!</h1>
             </main>
         );
 
     } else {
         returnValue = (
             <main className='page-container home'>
-                <h1>I like the <span className='yellow'>STONK!</span></h1>
+                <h1 className="main-title">I like the <span className='yellow'>STONK!</span></h1>
             </main>
         );
     }

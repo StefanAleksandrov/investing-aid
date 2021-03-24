@@ -1,4 +1,5 @@
-.sign-up {
+.sign-up,
+.sign-in {
     flex-direction: column;
 
     .container {
@@ -17,14 +18,14 @@
             display: flex;
             flex-wrap: wrap;
             flex: 2;
-            padding: 1rem 5rem;
+            padding: 1rem 3rem;
             border-radius: 1rem;
             box-shadow: 1px 1px 20px rgb(94, 94, 94);
     
             h1 {
                 text-align: center;
                 width: 100%;
-                margin-bottom: 2rem;
+                margin: 2rem 0;
                 font-size: 1.6rem;
             }
 
@@ -34,14 +35,13 @@
                 flex-basis: 100%;
                 font-weight: bold;
 
-                * {
+                input {
                     padding: 0.75rem 1rem;
                     margin: 0.5rem 0 2rem;
                     width: 100%;
                 }
 
-                input:not(:last-of-type) {
-
+                input:not(.button) {
                     &:hover {
                         border: 2px solid #f0d97f;
                         background-color: #fffefb;
@@ -54,6 +54,12 @@
                         background-color: #fcfaf3;
                     }
                 }
+            }
+
+            p {
+                width: 100%;
+                text-align: center;
+                padding-bottom: 1rem;
             }
         }
     }

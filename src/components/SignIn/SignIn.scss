@@ -1,0 +1,19 @@
+.page-container.sign-in {
+    .container {
+        .form {
+            .center {
+                text-align: center;
+
+                .checkbox {
+                    height: 1rem;
+                    border: 1px solid black;
+                    outline: 1px;
+                }
+            }
+
+            p {
+                margin-bottom: 8rem;
+            }
+        }
+    }
+}
