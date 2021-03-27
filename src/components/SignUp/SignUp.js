@@ -1,14 +1,21 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import './SignUp.scss';
 import registerImage from '../../images/register.jpg';
+import { onRegister } from '../../services/authService';
 
 export default function SignUp () {
+    const history = useHistory();
+
     function submitForm(e) {
         e.preventDefault();
-        console.log(e.target.elements.email.value);
-        console.log(e.target.elements.username.value);
-        console.log(e.target.elements.password.value);
+
+        //TODO validate
+
+        //Register user
+        onRegister(e.target.elements.email.value, e.target.elements.username.value, e.target.elements.password.value)
+            .then(() => history.push('/'))
+            .catch((err) => console.log(err.message));
     }
     
     return (
