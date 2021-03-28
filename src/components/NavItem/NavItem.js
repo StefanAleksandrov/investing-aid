@@ -16,8 +16,7 @@ export default class NavItem extends Component {
             localStorage.removeItem('user');
             localStorage.removeItem('email');
 
-            window.location.replace("http://localhost:3000");
-            // this.setState((oldState) => ({ ...oldState, redirect: true}));
+            this.props.history.push('/');
         }
     }
 
