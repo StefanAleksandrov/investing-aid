@@ -1,0 +1,15 @@
+.add-record {
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: top;
+        box-shadow: 1px 1px 20px black;
+        border-radius: 10px;
+        padding: 3rem 15rem;
+
+        h1 {
+            text-align: center;
+        }
+    }
+}
