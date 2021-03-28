@@ -28,3 +28,8 @@ export function onRegister(email, username, password) {
 export function onLogin(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
 }
+
+export function getUsername(uid) {
+    return fetch(URL + `users/${uid}.json`)
+        .then(resp => resp.json());
+}
