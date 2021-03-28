@@ -6,9 +6,7 @@ export default function Home() {
     const [logged, setLogged] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => {
-            setLogged((prev) => !prev);
-        }, 2000)
+        setLogged((prev) => !prev);
     }, []);
 
     return (
