@@ -34,9 +34,10 @@ export default class PageHeader extends Component {
                             uid,
                             username,
                             links: [
-                                { id: 0, title: 'About', link: '/about-us' },
+                                { id: 0, title: 'Currency Rates', link: '/currency-rates' },
                                 { id: 1, title: username, link: '/profile' },
-                                { id: 2, title: 'Sign Out', link: '/sign-out' }
+                                { id: 2, title: 'Add Record', link: '/add-record' },
+                                { id: 3, title: 'Sign Out', link: '/sign-out' }
                             ]
                         }
                     });

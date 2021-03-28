@@ -12,7 +12,7 @@ export default class NavItem extends Component {
     signOut(e) {
         e.preventDefault();
 
-        if (this.props.uid && localStorage.getItem('user') && localStorage.getItem('email')) {
+        if (this.props.username && localStorage.getItem('user') && localStorage.getItem('email')) {
             localStorage.removeItem('user');
             localStorage.removeItem('email');
 
