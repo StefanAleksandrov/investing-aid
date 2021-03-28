@@ -1,18 +1,30 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import './SignIn.scss';
 import loginImage from '../../images/login.jpg';
+import { onLogin } from '../../services/authService';
 
-export default function SignIn () {
+export default function SignIn() {
+    const history = useHistory();
+
     function submitForm(e) {
         e.preventDefault();
-        console.log((e.target.elements.email.value));
+        const email = e.target.elements.email.value;
+        const pass = e.target.elements.password.value;
+
+        onLogin(email, pass)
+            .then(resp => {
+                localStorage.setItem('user', resp.user.uid);
+                localStorage.setItem('email', resp.user.email);
+                history.push('/');
+            })
+            .catch(console.log);
     }
-    
+
     return (
         <main className='page-container sign-in'>
             <div className="container">
-                <img src={loginImage} width="700px" height="500px" alt="register"/>
+                <img src={loginImage} width="700px" height="500px" alt="register" />
 
                 <form className="form" onSubmit={submitForm} >
                     <h1>Login with your Account</h1>
@@ -21,12 +33,12 @@ export default function SignIn () {
                         Email:
                         <input type="text" name="email" />
                     </label>
-                    
+
                     <label>
                         Password:
                         <input type="password" name="password" />
                     </label>
-                    
+
                     <label className="center" >
                         Remember me
                         <input type="checkbox" className="checkbox" name="remember" />
@@ -40,5 +52,5 @@ export default function SignIn () {
                 </form>
             </div>
         </main>
-    )
+    );
 }

@@ -6,7 +6,8 @@ export function onRegister(email, username, password) {
         .then(() => auth.signInWithEmailAndPassword(email, password))
         .then(({ user }) => {
             localStorage.setItem('user', user.uid);
-            
+            localStorage.setItem('email', email);
+
             const newUser = {
                 email: user.email,
                 username,
@@ -14,7 +15,7 @@ export function onRegister(email, username, password) {
             }
 
             //Authenticate the write request
-            return auth.currentUser.getIdToken(false)
+            auth.currentUser.getIdToken(false)
                 .then((token) => {
                     fetch(URL + `users/${user.uid}.json?auth=${token}`, {
                         method: "PUT",
