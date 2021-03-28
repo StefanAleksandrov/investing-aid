@@ -1,11 +1,11 @@
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './SignIn.scss';
 import loginImage from '../../images/login.jpg';
 import { onLogin } from '../../services/authService';
 
 export default function SignIn() {
-    const history = useHistory();
+    // const history = useHistory();
 
     function submitForm(e) {
         e.preventDefault();
@@ -16,7 +16,9 @@ export default function SignIn() {
             .then(resp => {
                 localStorage.setItem('user', resp.user.uid);
                 localStorage.setItem('email', resp.user.email);
-                history.push('/');
+                
+                window.location.replace("http://localhost:3000");
+                // history.push('/');
             })
             .catch(console.log);
     }
