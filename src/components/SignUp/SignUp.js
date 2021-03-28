@@ -4,9 +4,7 @@ import './SignUp.scss';
 import registerImage from '../../images/register.jpg';
 import { onRegister } from '../../services/authService';
 
-export default function SignUp() {
-    // const history = useHistory();
-
+export default function SignUp({ history }) {
     function submitForm(e) {
         e.preventDefault();
 
@@ -15,8 +13,7 @@ export default function SignUp() {
         //Register user
         onRegister(e.target.elements.email.value, e.target.elements.username.value, e.target.elements.password.value)
             .then(() => {
-                // history.push('/');
-                window.location.replace("http://localhost:3000");
+                history.push('/');
             })
             .catch((err) => console.log(err.message));
     }
