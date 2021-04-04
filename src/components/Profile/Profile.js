@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import { getAll } from '../../services/stockService.js';
 import './Profile.scss';
 
-export default function Profile({ history }) {
+export default function Profile({
+    currentUser
+}) {
     const [records, setRecords] = useState([]);
 
     useEffect(() => {
-        const uid = localStorage.getItem('user');
+        const uid = currentUser?.uid || '';
 
-        if (!uid) history.push('/');
+        if (!uid) return;
 
         getAll(uid)
             .then(data => {
@@ -29,34 +31,39 @@ export default function Profile({ history }) {
                 }
             })
             .catch(console.log);
-    }, []);
+    }, [currentUser.uid]);
 
     return (
-        <div className="page-container container">
-            <h1>Your Investment records</h1>
+        <div className="page-container">
+            <h1 className="main-heading" >Your Investment records</h1>
 
-            <table>
-                <thead>
+            <table className="stocks" >
+                <thead className="heading" >
                     <tr>
-                        <th>№</th>
-                        <th>Stock</th>
-                        <th>Amount</th>
-                        <th>Bought date</th>
-                        <th>Price</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th className="cell" >№</th>
+                        <th className="cell" >Stock</th>
+                        <th className="cell" >Amount</th>
+                        <th className="cell" >Bought date</th>
+                        <th className="cell" >Price</th>
+                        <th className="cell" >Edit</th>
+                        <th className="cell" >Delete</th>
                     </tr>
                 </thead>
-                <tbody>
+
+                <tbody className="body" >
                     {
                         records.map((record, index) => {
-                            return (<tr>
-                                <td>{index + 1}</td>
-                                <td>{record.stock}</td>
-                                <td>{record.amount}</td>
-                                <td>{record.createdAt}</td>
-                                <td>{record.price}</td>
-                            </tr>)
+                            return (
+                                <tr key={record.id} className="line" >
+                                    <td className="cell" >{index + 1}</td>
+                                    <td className="cell" >{record.stock}</td>
+                                    <td className="cell" >{record.amount}</td>
+                                    <td className="cell" >{record.createdAt.split("T")[0]}</td>
+                                    <td className="cell" >{record.price}</td>
+                                    <td className="cell btn" >Edit</td>
+                                    <td className="cell btn" >&times;</td>
+                                </tr>
+                            )
                         })
                     }
                 </tbody>

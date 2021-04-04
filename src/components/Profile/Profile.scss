@@ -1,0 +1,49 @@
+.page-container {
+    .main-heading{
+        text-align: center;
+        padding: 1rem 0 5rem;
+    }
+
+    .stocks {
+        margin: auto;
+        border-collapse: collapse;
+
+        .heading {
+            background-color: #C59F19;
+            color: white;
+            text-align: center;
+
+            .cell {
+                padding: 1rem;
+            }
+        }
+
+        .body {
+            text-align: center;
+
+            .line {
+                .cell {
+                    padding: 1rem;
+
+                    &.btn {
+                        cursor: pointer;
+
+                        &:last-of-type {
+                            font-size: 1.25rem;
+                        }
+                    }
+                }
+            }
+
+            .line:nth-of-type(even) {
+                color: #C59F19;
+                font-weight: bold;
+            }
+
+            .line:nth-of-type(odd) {
+                background-color: #eeece6;
+                // color: white;
+            }
+        }
+    }
+}
