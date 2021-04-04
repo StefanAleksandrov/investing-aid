@@ -2,6 +2,7 @@
 
 This application's main goal is to make it easy for any investor to keep track of his investments gains/losses.
 Signed in users will be able to add trades in different currencies and keep track of their changes in any currency.
+For this reason, an external Currency API is introduced (https://api.exchangeratesapi.io/latest).
 
 ## Available Scripts
 
