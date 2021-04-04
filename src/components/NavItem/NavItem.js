@@ -11,12 +11,13 @@ export default class NavItem extends Component {
 
     signOut(e) {
         e.preventDefault();
+        console.log(this.props);
 
         if (this.props.username && localStorage.getItem('user') && localStorage.getItem('email')) {
             localStorage.removeItem('user');
             localStorage.removeItem('email');
 
-            this.props.history.push('/');
+            // this.props.history.push('/');
         }
     }
 
