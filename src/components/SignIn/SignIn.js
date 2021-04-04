@@ -1,24 +1,29 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import './SignIn.scss';
 import loginImage from '../../images/login.jpg';
 import { onLogin } from '../../services/authService';
 
-export default function SignIn() {
-    // const history = useHistory();
+export default function SignIn () {
+    const history = useHistory();
 
     function submitForm(e) {
         e.preventDefault();
-        const email = e.target.elements.email.value;
-        const pass = e.target.elements.password.value;
+
+        const email = e.target.email.value;
+        const pass = e.target.password.value;
+        const rememberMe = e.target.remember.checked;
+
+        if (!email || !pass) return;
 
         onLogin(email, pass)
             .then(resp => {
-                localStorage.setItem('user', resp.user.uid);
-                localStorage.setItem('email', resp.user.email);
+                if ( rememberMe ) {
+                    localStorage.setItem('user', resp.user.uid);
+                    localStorage.setItem('email', resp.user.email);
+                }
                 
-                window.location.replace("http://localhost:3000");
-                // history.push('/');
+                history.push('/');
             })
             .catch(console.log);
     }

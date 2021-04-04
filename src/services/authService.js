@@ -5,9 +5,6 @@ export function onRegister(email, username, password) {
     return auth.createUserWithEmailAndPassword(email, password)
         .then(() => auth.signInWithEmailAndPassword(email, password))
         .then(({ user }) => {
-            localStorage.setItem('user', user.uid);
-            localStorage.setItem('email', email);
-
             const newUser = {
                 email: user.email,
                 username,
@@ -22,11 +19,11 @@ export function onRegister(email, username, password) {
                         body: JSON.stringify(newUser)
                     })
                 });
-        })
+        });
 }
 
 export function onLogin(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.signInWithEmailAndPassword(email, password)
 }
 
 export function getUsername(uid) {

@@ -8,14 +8,19 @@ export default function SignUp({ history }) {
     function submitForm(e) {
         e.preventDefault();
 
+        const email = e.target.elements.email.value;
+        const username = e.target.elements.username.value;
+        const password = e.target.elements.password.value;
+
         //TODO validate
+        if (!email || !username || !password) return;
 
         //Register user
-        onRegister(e.target.elements.email.value, e.target.elements.username.value, e.target.elements.password.value)
+        onRegister(email, username, password)
             .then(() => {
                 history.push('/');
             })
-            .catch((err) => console.log(err.message));
+            .catch(console.log);
     }
 
     return (
