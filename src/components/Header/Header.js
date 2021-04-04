@@ -26,6 +26,7 @@ export default function PageHeader ({
                         { id: 2, title: 'Add Record', link: '/add-record' },
                         { id: 3, title: 'Sign Out', link: '/sign-out' }
                     ]);
+                    localStorage.username = username;
                 })
                 .catch(console.log);
         } else {

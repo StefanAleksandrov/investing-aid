@@ -25,6 +25,7 @@ export default function App() {
       setCurrentUser({
         uid: localStorage.user,
         email: localStorage.email,
+        username: localStorage.username,
       })
     }
   }, []);

@@ -19,9 +19,10 @@ export default class NavItem extends Component {
     signOut(e) {
         e.preventDefault();
 
-        if (localStorage.getItem('user') && localStorage.getItem('email')) {
+        if (localStorage.user || localStorage.email || localStorage.username ) {
             localStorage.removeItem('user');
             localStorage.removeItem('email');
+            localStorage.removeItem('username');
         }
 
         this.setState((state) => ({
@@ -45,8 +46,8 @@ export default class NavItem extends Component {
                     return (
                         <li className='nav-item' key={x.id}>
                             { x.link === '/sign-out'
-                                ? <a href='/' onClick={this.signOut} >{x.title}</a>
-                                : <NavLink to={x.link} >{x.title}</NavLink>
+                                ? <a href='/' onClick={this.signOut} >{x.title.toUpperCase()}</a>
+                                : <NavLink to={x.link} >{x.title.toUpperCase()}</NavLink>
                             }
                         </li>
                     )
