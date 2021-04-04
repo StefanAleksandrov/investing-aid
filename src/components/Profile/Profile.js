@@ -26,7 +26,6 @@ export default function Profile({ history }) {
 
                     arr.sort((a, b) => a.stock.localeCompare(b.stock));
                     setRecords([...arr]);
-                    console.log(records);
                 }
             })
             .catch(console.log);
@@ -51,7 +50,6 @@ export default function Profile({ history }) {
                 <tbody>
                     {
                         records.map((record, index) => {
-                            console.log(index);
                             return (<tr>
                                 <td>{index + 1}</td>
                                 <td>{record.stock}</td>
