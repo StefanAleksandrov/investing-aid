@@ -40,9 +40,9 @@ export default function App() {
           <Route path='/about-us' exact={true} component={AboutUs} />
           <Route path='/sign-up' exact={true} component={SignUp} />
           <Route path='/sign-in' exact={true} component={SignIn} />
-          {/* <Route path='/profile' exact={true} component={Profile} /> */}
           <Route path='/profile' exact={true} render={(props) => <Profile {...props} currentUser={currentUser} />} />
-          <Route path='/add-record' exact={true} component={AddRecord} />
+          <Route path='/add-record' exact={true} key="add" component={AddRecord} />
+          <Route path='/edit/:id' exact={true} key="edit" component={AddRecord} />
         </Switch>
 
         <PageFooter />

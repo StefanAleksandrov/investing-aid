@@ -1,7 +1,14 @@
-import { addRecord } from '../../services/stockService';
+import { useEffect } from 'react';
+import { addRecord, getOneByID } from '../../services/stockService';
 import './AddRecord.scss';
 
-export default function CreateRecord({ history }) {
+export default function CreateRecord({ history, match }) {
+    useEffect(() => {
+        if (match.params.id) {
+            getOneByID(5, match.params.id)
+                .then(console.log);
+        }
+    }, [match.params.id])
 
     function create(e) {
         e.preventDefault();

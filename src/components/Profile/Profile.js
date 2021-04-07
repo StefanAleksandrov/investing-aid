@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getAll } from '../../services/stockService.js';
+import { getAll, deleteByID } from '../../services/stockService.js';
 import './Profile.scss';
 
 export default function Profile({
+    history,
     currentUser
 }) {
     const [records, setRecords] = useState([]);
@@ -33,6 +34,33 @@ export default function Profile({
             .catch(console.log);
     }, [currentUser.uid]);
 
+    function editEntryHandler(e, id) {
+        e.preventDefault();
+
+        history.push(`/edit/${id}`);
+    }
+
+    function deleteEntryHandler(e, id) {
+        e.preventDefault();
+
+        if (!window.confirm("Are you sure?")) return;
+
+        const uid = currentUser?.uid || '';
+
+        if (!uid) return;
+
+        deleteByID(uid, id)
+            .then(resp => {
+                if (resp.statusText === "OK") {
+                    let  newRecords = records.filter(record => {
+                        return record.id !== id;
+                    })
+
+                    setRecords(newRecords);
+                }
+            })
+    }
+
     return (
         <div className="page-container">
             <h1 className="main-heading" >Your Investment records</h1>
@@ -44,7 +72,8 @@ export default function Profile({
                         <th className="cell" >Stock</th>
                         <th className="cell" >Amount</th>
                         <th className="cell" >Bought date</th>
-                        <th className="cell" >Price</th>
+                        <th className="cell" >Price USD</th>
+                        <th className="cell" >Price BGN</th>
                         <th className="cell" >Edit</th>
                         <th className="cell" >Delete</th>
                     </tr>
@@ -60,13 +89,31 @@ export default function Profile({
                                     <td className="cell" >{record.amount}</td>
                                     <td className="cell" >{record.createdAt.split("T")[0]}</td>
                                     <td className="cell" >{record.price}</td>
-                                    <td className="cell btn" >Edit</td>
-                                    <td className="cell btn" >&times;</td>
+                                    <td className="cell" >{(record.price * 1.65).toFixed(2)}</td>
+                                    <td className="cell btn" >
+                                        <svg onClick={event => editEntryHandler(event, record.id)} aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square" className="svg-inline--fa fa-pen-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>
+                                    </td>
+                                    <td className="cell btn" >
+                                        <svg onClick={event => deleteEntryHandler(event, record.id)} aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" className="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                                    </td>
                                 </tr>
                             )
                         })
                     }
                 </tbody>
+
+                <tfoot className="foot" >
+                    <tr className="line" >
+                        <td className="cell" ></td>
+                        <td className="cell" ></td>
+                        <td className="cell" ></td>
+                        <td className="cell" >Sum:</td>
+                        <td className="cell" >50.15 USD</td>
+                        <td className="cell" >80.50 BGN</td>
+                        <td className="cell" ></td>
+                        <td className="cell" ></td>
+                    </tr>
+                </tfoot>
             </table>
 
             {

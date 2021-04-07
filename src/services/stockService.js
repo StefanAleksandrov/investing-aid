@@ -7,6 +7,11 @@ export function getAll(userID) {
         .then(res => res.json());
 }
 
+export function getOneByID (userID, id) {
+    return fetch(URL + `records/${userID}/${id}.json`)
+        .then(res => res.json());
+}
+
 export function addRecord(stock, amount, price, uid) {
     const newRecord = {
         stock,
@@ -28,6 +33,15 @@ export function addRecord(stock, amount, price, uid) {
             })
         })
         .then(res => res.json());
+}
+
+export function deleteByID(uid, id) {
+    return auth.currentUser.getIdToken(false)
+        .then((token) => {
+            return fetch(URL + `records/${uid}/${id}.json?auth=${token}`, {
+                method: "DELETE",
+            })
+        })
 }
 
 function getCurrencies() {
