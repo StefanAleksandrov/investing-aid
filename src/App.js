@@ -41,8 +41,10 @@ export default function App() {
           <Route path='/sign-up' exact={true} component={SignUp} />
           <Route path='/sign-in' exact={true} component={SignIn} />
           <Route path='/profile' exact={true} render={(props) => <Profile {...props} currentUser={currentUser} />} />
-          <Route path='/add-record' exact={true} key="add" component={AddRecord} />
-          <Route path='/edit/:id' exact={true} key="edit" component={AddRecord} />
+          
+          {/* In order to pass the currentUser as props WITH the Router props  we need to use the render method with arrow function */}
+          <Route path='/add-record' exact={true} key="add" render={(props) => <AddRecord {...props} currentUser={currentUser} />} />
+          <Route path='/edit/:id' exact={true} key="edit" render={(props) => <AddRecord {...props} currentUser={currentUser} />} />
         </Switch>
 
         <PageFooter />

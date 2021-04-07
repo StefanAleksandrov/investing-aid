@@ -1,44 +1,71 @@
-import { useEffect } from 'react';
-import { addRecord, getOneByID } from '../../services/stockService';
+import { useEffect, useState } from 'react';
+import { addRecord, updateRecord, getOneByID } from '../../services/stockService';
 import './AddRecord.scss';
 
-export default function CreateRecord({ history, match }) {
+export default function CreateRecord({
+    history,
+    match,
+    currentUser,
+}) {
+    const [stock, setStock] = useState({
+        stock: '',
+        amount: '',
+        price: '',
+        currency: 'USD',
+    });
+    
     useEffect(() => {
-        if (match.params.id) {
-            getOneByID(5, match.params.id)
-                .then(console.log);
+        if (match.params.id && currentUser) {
+            getOneByID(currentUser.uid, match.params.id)
+                .then(setStock);
         }
-    }, [match.params.id])
+    }, [match.params.id, currentUser])
 
     function create(e) {
         e.preventDefault();
 
-        const uid = localStorage.getItem("user");
-
         //If no logged in user abort
-        if (!uid) return history.push('/');
+        if (!currentUser.uid) return history.push('/');
 
-        const [stock, amount, price] = e.target.elements;
-        addRecord(stock.value, amount.value, price.value, uid)
-            .then(() => history.push('/profile'))
-            .catch (console.log);
+        if (match.params.id) {
+            updateRecord(stock, currentUser.uid, match.params.id)
+                .then(() => history.push('/profile'))
+                .catch (console.log);
+
+        } else {
+            addRecord(stock, currentUser.uid)
+                .then(() => history.push('/profile'))
+                .catch (console.log);
+
+        }
     }
 
     return (
         <div className="page-container add-record">
-            <form onSubmit={create} >
+            <form className="form" onSubmit={create} >
                 <h1>Add New Investment Record</h1>
 
                 <label htmlFor="stock">Stock</label>
-                <input type="text" id='stock' name='stock' />
+                <input type="text" id='stock' name='stock' value={stock.stock} onChange={(event) => setStock(oldStock => ({...oldStock, stock: event.target.value }))} />
 
                 <label htmlFor="amount">Amount</label>
-                <input type="number" id='amount' name='amount' />
+                <input type="number" id='amount' name='amount' value={stock.amount} onChange={(event) => setStock(oldStock => ({...oldStock, amount: event.target.value }))} />
 
-                <label htmlFor="price">Price per share in USD</label>
-                <input type="float" id='price' name='price' />
+                <label htmlFor="price">Price per share</label>
+                <input type="float" id='price' name='price' value={stock.price} onChange={(event) => setStock(oldStock => ({...oldStock, price: event.target.value }))} />
 
-                <input type="submit" value='Add' />
+                <label htmlFor="currency">Currency</label>
+                <select id='currency' name='currency' value={stock.currency} onChange={(event) => setStock(oldStock => ({...oldStock, currency: event.target.value }))} >
+                    <option value="usd" >USD</option>
+                    <option value="eur" >EUR</option>
+                    <option value="bgn" >BGN</option>
+                </select>
+
+                {
+                    match.params.id
+                        ? <input type="submit" value='Update' />
+                        : <input type="submit" value='Add' />
+                }
             </form>
         </div>
     )
