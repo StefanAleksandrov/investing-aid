@@ -73,6 +73,6 @@ export function deleteByID(uid, id) {
         })
 }
 
-function getCurrencies(currency) {
+export function getCurrencies(currency) {
     return fetch(CurrenciesURL + `?access_key=${ACCESS_KEY}`);
 }
