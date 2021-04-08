@@ -37,7 +37,7 @@ export default function Profile({
     useEffect(() => {
         setTotalPrice(() => {
             return records.reduce((acc, current) => {
-                return acc + current.prices[currency]
+                return acc + (current.prices[currency] * current.amount);
             }, 0);
         })
     }, [records, currency]);
@@ -82,6 +82,7 @@ export default function Profile({
                                         <th className="cell" >Amount</th>
                                         <th className="cell" >Bought date</th>
                                         <th className="cell" >Bought at</th>
+                                        <th className="cell" >Total</th>
                                         <th className="cell" >Current price</th>
                                         <th className="cell" >Gain / Loss</th>
                                         <th className="cell" >Edit</th>
@@ -99,6 +100,7 @@ export default function Profile({
                                                     <td className="cell" >{record.amount}</td>
                                                     <td className="cell" >{record.createdAt.split("T")[0]}</td>
                                                     <td className="cell" >{Number(record.prices[currency]).toFixed(2)} {currency}</td>
+                                                    <td className="cell" >{Number(record.prices[currency] * record.amount).toFixed(2)} {currency}</td>
                                                     <td className="cell" >--.-- {currency}</td>
                                                     <td className="cell" >--.-- %</td>
                                                     <td className="cell btn" >
@@ -115,6 +117,7 @@ export default function Profile({
 
                                 <tfoot className="foot" >
                                     <tr className="line" >
+                                        <td className="cell" ></td>
                                         <td className="cell" ></td>
                                         <td className="cell" ></td>
                                         <td className="cell" ></td>
