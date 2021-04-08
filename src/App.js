@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+//firebase auth
+import { auth } from './config/firebaseInit';
+
+//style
 import './App.css';
 
 //Components
@@ -11,7 +16,8 @@ import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
 import Profile from './components/Profile/Profile';
 import AddRecord from './components/AddRecord/AddRecord';
-import { auth } from './config/firebaseInit';
+import CurrencyRates from './components/CurrencyRates/CurrencyRates';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 export default function App() {
   const [ currentUser, setCurrentUser ] = useState(null);
@@ -45,6 +51,9 @@ export default function App() {
           {/* In order to pass the currentUser as props WITH the Router props  we need to use the render method with arrow function */}
           <Route path='/add-record' exact={true} key="add" render={(props) => <AddRecord {...props} currentUser={currentUser} />} />
           <Route path='/edit/:id' exact={true} key="edit" render={(props) => <AddRecord {...props} currentUser={currentUser} />} />
+
+          <Route path='/currency-rates' exact={true} component={CurrencyRates} />
+          <Route path='*' exact={true} component={PageNotFound} />
         </Switch>
 
         <PageFooter />
