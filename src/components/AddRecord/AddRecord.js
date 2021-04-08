@@ -43,7 +43,12 @@ export default function CreateRecord({
     return (
         <div className="page-container add-record">
             <form className="form" onSubmit={create} >
-                <h1>Add New Investment Record</h1>
+
+                {
+                    match.params.id
+                        ? <h1 className="main-heading" >Edit Investment Record</h1>
+                        : <h1 className="main-heading" >Add New Investment Record</h1>
+                }
 
                 <label htmlFor="stock">Stock</label>
                 <input type="text" id='stock' name='stock' value={stock.stock} onChange={(event) => setStock(oldStock => ({...oldStock, stock: event.target.value }))} />
@@ -63,8 +68,8 @@ export default function CreateRecord({
 
                 {
                     match.params.id
-                        ? <input type="submit" value='Update' />
-                        : <input type="submit" value='Add' />
+                        ? <input type="submit" className="button" value='Update' />
+                        : <input type="submit" className="button" value='Add' />
                 }
             </form>
         </div>
