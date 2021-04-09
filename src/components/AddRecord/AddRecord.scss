@@ -8,8 +8,8 @@
         align-items: flex-start;
         box-shadow: 1px 1px 20px black;
         border-radius: 10px;
-        padding: 1rem 10rem;
-        font-size: 1.25rem;
+        padding: 1rem 7.5rem;
+        font-size: 1.1rem;
 
         .main-heading {
             text-align: center;
@@ -23,26 +23,27 @@
             margin: auto;
             flex-basis: 100%;
             font-weight: bold;
-        }
-
-        input,
-        select {
-            padding: 0.75rem 1rem;
-            margin: 0.5rem 0 2rem;
             width: 100%;
-        }
 
-        input:not(.button) {
-            &:hover {
-                border: 2px solid #f0d97f;
-                background-color: #fffefb;
-                outline: none;
+            input,
+            select {
+                padding: 0.75rem 1rem;
+                margin: 0.5rem 0 2rem;
+                width: 100%;
             }
-
-            &:focus {
-                border: 2px solid #DBB419;
-                outline: none;
-                background-color: #fcfaf3;
+    
+            input:not(.button) {
+                &:hover {
+                    border: 2px solid #f0d97f;
+                    background-color: #fffefb;
+                    outline: none;
+                }
+    
+                &:focus {
+                    border: 2px solid #DBB419;
+                    outline: none;
+                    background-color: #fcfaf3;
+                }
             }
         }
     }
