@@ -6,7 +6,10 @@ import registerImage from '../../images/register.jpg';
 import { onRegister } from '../../services/authService';
 import { validateEmail, validateUsername, validatePassword, validateRepeatPassword } from '../../validators/authValidate';
 
-export default function SignUp({ history }) {
+export default function SignUp({
+    history,
+    dispatch,
+}) {
     const [errorEmail, setErrorEmail] = useState('');
     const [errorUsername, setErrorUsername] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
@@ -38,7 +41,7 @@ export default function SignUp({ history }) {
             .then(() => {
                 history.push('/');
             })
-            .catch(console.log);
+            .catch(err => dispatch({message: err.message, type: 'error', action: 'NOTIFY'}));
     }
 
     return (
