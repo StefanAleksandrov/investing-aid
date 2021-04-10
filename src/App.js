@@ -18,6 +18,9 @@ import Notification from './components/Notification/Notification';
 import NotificationContext from './contexts/NotificationContext';
 import AuthContext from './contexts/AuthContext';
 
+import isAuth from './hoc/isAuth';
+import isGuest from './hoc/isGuest';
+
 export default function App() {
   const [currentUser, setCurrentUser] = useState({
     uid: '',
@@ -53,7 +56,7 @@ export default function App() {
         uid: localStorage.uid,
         email: localStorage.email,
         username: localStorage.username,
-      })
+      });
     }
   }, []);
 
@@ -67,13 +70,15 @@ export default function App() {
 
             <Switch>
               <Route path='/' exact={true} component={Home} />
-              <Route path='/about-us' exact={true} component={AboutUs} />
+              {/* Route Guard */}
+              <Route path='/about-us' exact={true} component={isGuest(AboutUs)} />
               <Route path='/sign-up' exact={true} component={SignUp} />
               <Route path='/sign-in' exact={true} component={SignIn} />
               <Route path='/my-investments' exact={true} component={MyInvestments} />
               <Route path='/add-investment' exact={true} key="add" component={AddInvestment} />
               <Route path='/edit/:id' exact={true} key="edit" component={AddInvestment} />
-              <Route path='/currency-rates' exact={true} component={CurrencyRates} />
+              {/* Route Guard */}
+              <Route path='/currency-rates' exact={true} component={isAuth(CurrencyRates)} />
               <Route path='*' component={PageNotFound} />
             </Switch>
 
