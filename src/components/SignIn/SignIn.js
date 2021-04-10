@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
 import './SignIn.scss';
 import loginImage from '../../images/login.jpg';
 import { onLogin } from '../../services/authService';
 import { validateEmail, validatePassword } from '../../validators/authValidate';
+import NotifictaionContext from '../../contexts/NotificationContext';
 
 export default function SignIn () {
     const history = useHistory();
     const [errorEmail, setErrorEmail] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
+
+    const dispatch = useContext(NotifictaionContext)[1];
 
     function submitForm(e) {
         e.preventDefault();
@@ -32,10 +35,11 @@ export default function SignIn () {
                     localStorage.setItem('user', resp.user.uid);
                     localStorage.setItem('email', resp.user.email);
                 }
-                
+
+                dispatch({ message: 'Successfull login!', type: 'success', action: 'NOTIFY'});
                 history.push('/');
             })
-            .catch(console.log);
+            .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY'}) );
     }
 
     return (

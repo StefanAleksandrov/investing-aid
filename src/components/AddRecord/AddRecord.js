@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { addRecord, updateRecord, getOneByID } from '../../services/stockService';
 import validate from '../../validators/stockValidate';
+import NotificationContext from '../../contexts/NotificationContext';
+
 import './AddRecord.scss';
 
 export default function CreateRecord({
@@ -18,7 +20,9 @@ export default function CreateRecord({
     const [errorStock, setErrorStock] = useState('');
     const [errorAmount, setErrorAmount] = useState('');
     const [errorPrice, setErrorPrice] = useState('');
-    
+
+    const dispatch = useContext(NotificationContext)[1];
+
     useEffect(() => {
         if (match.params.id && currentUser) {
             getOneByID(currentUser.uid, match.params.id)
@@ -44,13 +48,19 @@ export default function CreateRecord({
 
         if (match.params.id) {
             updateRecord(stock, currentUser.uid, match.params.id)
-                .then(() => history.push('/profile'))
-                .catch (console.log);
+                .then(() => {
+                    dispatch({ message: 'Item updated successfully!', type: 'success', action: 'NOTIFY' });
+                    history.push('/profile');
+                })
+                .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY' }));
 
         } else {
             addRecord(stock, currentUser.uid)
-                .then(() => history.push('/profile'))
-                .catch (console.log);
+                .then(() => {
+                    dispatch({ message: 'Item added successfully!', type: 'success', action: 'NOTIFY' });
+                    history.push('/profile');
+                })
+                .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY' }));
 
         }
     }
@@ -67,25 +77,25 @@ export default function CreateRecord({
 
                 <label className="error-container" >
                     Stock
-                    <input type="text" name='stock' className={errorStock ? 'error' : ''} value={stock.stock} onChange={(event) => setStock(oldStock => ({...oldStock, stock: event.target.value }))} />
-                    <div className={"error-message " + (errorStock ? '' : 'hide') } >{errorStock}</div>
+                    <input type="text" name='stock' className={errorStock ? 'error' : ''} value={stock.stock} onChange={(event) => setStock(oldStock => ({ ...oldStock, stock: event.target.value }))} />
+                    <div className={"error-message " + (errorStock ? '' : 'hide')} >{errorStock}</div>
                 </label>
 
                 <label className="error-container" >
                     Amount
-                    <input type="number" name='amount' className={errorAmount ? 'error' : ''} value={stock.amount} onChange={(event) => setStock(oldStock => ({...oldStock, amount: event.target.value }))} />
-                    <div className={"error-message " + (errorAmount ? '' : 'hide') } >{errorAmount}</div>
+                    <input type="number" name='amount' className={errorAmount ? 'error' : ''} value={stock.amount} onChange={(event) => setStock(oldStock => ({ ...oldStock, amount: event.target.value }))} />
+                    <div className={"error-message " + (errorAmount ? '' : 'hide')} >{errorAmount}</div>
                 </label>
 
                 <label className="error-container" >
                     Price per share
-                    <input type="float" name='price' className={errorPrice ? 'error' : ''} value={stock.price} onChange={(event) => setStock(oldStock => ({...oldStock, price: event.target.value }))} />
-                    <div className={"error-message " + (errorPrice ? '' : 'hide') } >{errorPrice}</div>
+                    <input type="float" name='price' className={errorPrice ? 'error' : ''} value={stock.price} onChange={(event) => setStock(oldStock => ({ ...oldStock, price: event.target.value }))} />
+                    <div className={"error-message " + (errorPrice ? '' : 'hide')} >{errorPrice}</div>
                 </label>
 
                 <label className="error-container" >
                     Currency
-                    <select name='currency' value={stock.currency} onChange={(event) => setStock(oldStock => ({...oldStock, currency: event.target.value }))} >
+                    <select name='currency' value={stock.currency} onChange={(event) => setStock(oldStock => ({ ...oldStock, currency: event.target.value }))} >
                         <option value="usd" >USD</option>
                         <option value="eur" >EUR</option>
                         <option value="bgn" >BGN</option>

@@ -1,19 +1,21 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import './SignUp.scss';
 import registerImage from '../../images/register.jpg';
 import { onRegister } from '../../services/authService';
 import { validateEmail, validateUsername, validatePassword, validateRepeatPassword } from '../../validators/authValidate';
+import NotifictaionContext from '../../contexts/NotificationContext';
 
 export default function SignUp({
     history,
-    dispatch,
 }) {
     const [errorEmail, setErrorEmail] = useState('');
     const [errorUsername, setErrorUsername] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
     const [errorRepeatPassword, setErrorRepeatPassword] = useState('');
+
+    const dispatch = useContext(NotifictaionContext)[1];
 
     function submitForm(e) {
         e.preventDefault();
@@ -33,15 +35,16 @@ export default function SignUp({
         setErrorPassword(passwordError);
         setErrorRepeatPassword(rePasswordError);
 
-        //TODO validate
+        //Validate
         if (emailError || usernameError || passwordError || rePasswordError) return;
 
         //Register user
         onRegister(email, username, password)
             .then(() => {
+                dispatch({ message: 'Successfull registration!', type: 'success', action: 'NOTIFY'});
                 history.push('/');
             })
-            .catch(err => dispatch({message: err.message, type: 'error', action: 'NOTIFY'}));
+            .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY'}) );
     }
 
     return (
@@ -55,25 +58,25 @@ export default function SignUp({
                     <label className="error-container" >
                         Email:
                         <input type="text" name="email" className={errorEmail ? 'error' : ''} />
-                        <div className={"error-message " + (errorEmail ? '' : 'hide') } >{errorEmail}</div>
+                        <div className={"error-message " + (errorEmail ? '' : 'hide')} >{errorEmail}</div>
                     </label>
 
                     <label className="error-container" >
                         Username:
                         <input type="text" name="username" className={errorUsername ? 'error' : ''} />
-                        <div className={"error-message " + (errorUsername ? '' : 'hide') } >{errorUsername}</div>
+                        <div className={"error-message " + (errorUsername ? '' : 'hide')} >{errorUsername}</div>
                     </label>
 
                     <label className="error-container" >
                         Password:
                         <input type="password" name="password" className={errorPassword ? 'error' : ''} />
-                        <div className={"error-message " + (errorPassword ? '' : 'hide') } >{errorPassword}</div>
+                        <div className={"error-message " + (errorPassword ? '' : 'hide')} >{errorPassword}</div>
                     </label>
 
                     <label className="error-container" >
                         Repeat Password:
                         <input type="password" name="repassword" className={errorRepeatPassword ? 'error' : ''} />
-                        <div className={"error-message " + (errorRepeatPassword ? '' : 'hide') } >{errorRepeatPassword}</div>
+                        <div className={"error-message " + (errorRepeatPassword ? '' : 'hide')} >{errorRepeatPassword}</div>
                     </label>
 
                     <label>
