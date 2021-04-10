@@ -1,4 +1,4 @@
-export default {
+const validate = {
     stock(stock) {
         if (stock === '') return 'Stock field should not be empty!';
         if (stock.length < 3) return 'Stock should be 3 symbols or more!'
@@ -15,8 +15,10 @@ export default {
 
     price(price) {
         if (price === '') return 'Price per share field should not be empty!';
-        if (Number(price) === NaN) return 'Price should be a number!';
+        if (isNaN(Number(price))) return 'Price should be a number!';
 
         return;
     }
 }
+
+export default validate;
