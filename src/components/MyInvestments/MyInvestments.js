@@ -28,7 +28,7 @@ export default function MyInvestments({ history }) {
                     }
 
                     arr.sort((a, b) => a.stock.localeCompare(b.stock));
-                    setRecords([...arr]);
+                    setRecords(() => [...arr]);
                 }
             })
             .catch(console.log);
