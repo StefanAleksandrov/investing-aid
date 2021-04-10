@@ -11,6 +11,10 @@ export function onRegister(email, username, password) {
                 joined: new Date(),
             }
 
+            localStorage.setItem('uid', user.uid);
+            localStorage.setItem('email', user.email);
+            localStorage.setItem('username', username);
+
             //Authenticate the write request
             auth.currentUser.getIdToken(false)
                 .then((token) => {

@@ -3,16 +3,18 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 import './SignIn.scss';
 import loginImage from '../../images/login.jpg';
-import { onLogin } from '../../services/authService';
+import { onLogin, getUsername } from '../../services/authService';
 import { validateEmail, validatePassword } from '../../validators/authValidate';
-import NotifictaionContext from '../../contexts/NotificationContext';
+import NotificationContext from '../../contexts/NotificationContext';
+import AuthContext from '../../contexts/AuthContext';
 
 export default function SignIn () {
     const history = useHistory();
     const [errorEmail, setErrorEmail] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
 
-    const dispatch = useContext(NotifictaionContext)[1];
+    const dispatch = useContext(NotificationContext)[1];
+    const setCurrentUser = useContext(AuthContext)[1];
 
     function submitForm(e) {
         e.preventDefault();
@@ -32,12 +34,17 @@ export default function SignIn () {
         onLogin(email, password)
             .then(resp => {
                 if ( rememberMe ) {
-                    localStorage.setItem('user', resp.user.uid);
+                    localStorage.setItem('uid', resp.user.uid);
                     localStorage.setItem('email', resp.user.email);
                 }
 
-                dispatch({ message: 'Successfull login!', type: 'success', action: 'NOTIFY'});
-                history.push('/');
+                getUsername(resp.user.uid)
+                    .then(user => {
+                        if ( rememberMe ) localStorage.setItem('username', user.username);
+                        dispatch({ message: 'Successfull login!', type: 'success', action: 'NOTIFY'});
+                        setCurrentUser(() => ({email: resp.user.email, uid: resp.user.uid, username: user.username}));
+                        history.push('/');
+                    })
             })
             .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY'}) );
     }

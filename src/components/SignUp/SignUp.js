@@ -6,6 +6,7 @@ import registerImage from '../../images/register.jpg';
 import { onRegister } from '../../services/authService';
 import { validateEmail, validateUsername, validatePassword, validateRepeatPassword } from '../../validators/authValidate';
 import NotifictaionContext from '../../contexts/NotificationContext';
+import AuthContext from '../../contexts/AuthContext';
 
 export default function SignUp({
     history,
@@ -16,6 +17,7 @@ export default function SignUp({
     const [errorRepeatPassword, setErrorRepeatPassword] = useState('');
 
     const dispatch = useContext(NotifictaionContext)[1];
+    const setCurrentUser = useContext(AuthContext)[1];
 
     function submitForm(e) {
         e.preventDefault();
@@ -42,6 +44,7 @@ export default function SignUp({
         onRegister(email, username, password)
             .then(() => {
                 dispatch({ message: 'Successfull registration!', type: 'success', action: 'NOTIFY'});
+                setCurrentUser(() => ({uid: localStorage.uid, email, username}));
                 history.push('/');
             })
             .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY'}) );
