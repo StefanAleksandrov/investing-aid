@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getAll, deleteByID } from '../../services/stockService.js';
-import './Profile.scss';
+import AuthContext from '../../contexts/AuthContext';
+import './MyInvestments.scss';
 
-export default function Profile({
-    history,
-    currentUser
-}) {
+export default function MyInvestments({ history }) {
+    const currentUser = useContext(AuthContext)[0];
+
     const [currency, setCurrency] = useState("USD");
     const [records, setRecords] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);

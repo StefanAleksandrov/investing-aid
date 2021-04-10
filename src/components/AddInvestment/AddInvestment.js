@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
+
 import { addRecord, updateRecord, getOneByID } from '../../services/stockService';
 import validate from '../../validators/stockValidate';
 import NotificationContext from '../../contexts/NotificationContext';
+import AuthContext from '../../contexts/AuthContext';
 
-import './AddRecord.scss';
+import './AddInvestment.scss';
 
-export default function CreateRecord({
+export default function AddInvestment({
     history,
     match,
-    currentUser,
 }) {
     const [stock, setStock] = useState({
         stock: '',
@@ -22,6 +23,7 @@ export default function CreateRecord({
     const [errorPrice, setErrorPrice] = useState('');
 
     const dispatch = useContext(NotificationContext)[1];
+    const currentUser = useContext(AuthContext)[0];
 
     useEffect(() => {
         if (match.params.id && currentUser) {
@@ -50,7 +52,7 @@ export default function CreateRecord({
             updateRecord(stock, currentUser.uid, match.params.id)
                 .then(() => {
                     dispatch({ message: 'Item updated successfully!', type: 'success', action: 'NOTIFY' });
-                    history.push('/profile');
+                    history.push('/my-investments');
                 })
                 .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY' }));
 
@@ -58,7 +60,7 @@ export default function CreateRecord({
             addRecord(stock, currentUser.uid)
                 .then(() => {
                     dispatch({ message: 'Item added successfully!', type: 'success', action: 'NOTIFY' });
-                    history.push('/profile');
+                    history.push('/my-investments');
                 })
                 .catch(err => dispatch({ message: err.message, type: 'error', action: 'NOTIFY' }));
 
