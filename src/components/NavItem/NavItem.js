@@ -1,8 +1,14 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { auth } from '../../config/firebaseInit';
+import AuthContext from '../../contexts/AuthContext';
+
 import './NavItem.scss';
 
 export default class NavItem extends Component {
+    static contextType = AuthContext;
+
     constructor(props) {
         super(props);
 
@@ -11,14 +17,17 @@ export default class NavItem extends Component {
 
     signOut(e) {
         e.preventDefault();
-        console.log(this.props);
-
-        if (this.props.username && localStorage.getItem('user') && localStorage.getItem('email')) {
-            localStorage.removeItem('user');
+        
+        if (localStorage.uid || localStorage.email || localStorage.username ) {
+            localStorage.removeItem('uid');
             localStorage.removeItem('email');
-
-            // this.props.history.push('/');
+            localStorage.removeItem('username');
         }
+        
+        //set auth context to empty strings
+        this.context[1](() => ({email: '', uid: '', username:''}) );
+        auth.signOut();
+        this.props.history.push('/');
     }
 
     render() {

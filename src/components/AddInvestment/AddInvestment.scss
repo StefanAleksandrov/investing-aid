@@ -1,0 +1,49 @@
+.add-record {
+    .form {
+        width: 65%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        box-shadow: 1px 1px 20px black;
+        border-radius: 10px;
+        padding: 1rem 7.5rem 4rem;
+        font-size: 1.1rem;
+
+        .main-heading {
+            text-align: center;
+            width: 100%;
+            font-size: 2rem;
+            padding: 1rem 0 2rem;
+        }
+
+        label {
+            margin: auto;
+            flex-basis: 100%;
+            font-weight: bold;
+            width: 100%;
+
+            input,
+            select {
+                padding: 0.75rem 1rem;
+                margin: 0.5rem 0 2rem;
+                width: 100%;
+            }
+    
+            input:not(.button) {
+                &:hover {
+                    border: 2px solid #f0d97f;
+                    background-color: #fffefb;
+                    outline: none;
+                }
+    
+                &:focus {
+                    border: 2px solid #DBB419;
+                    outline: none;
+                    background-color: #fcfaf3;
+                }
+            }
+        }
+    }
+}

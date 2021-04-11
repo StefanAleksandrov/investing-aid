@@ -1,0 +1,45 @@
+.page-container {
+    .main-heading {
+        .subheading {
+            padding: 1rem;
+            font-size: 1.6rem;
+
+            .bold {
+                font-size: 1.7rem;
+                font-weight: bolder;
+                color: #DBB419;
+            }
+        }
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        .col-50 {
+            flex: 0 0 50%;
+            max-width: 50%;
+
+            p {
+                text-align: center;
+                font-size: 1.25rem;
+                line-height: 2.5rem;
+
+                .bold {
+                    font-size: 1.3rem;
+                    font-weight: bolder;
+                    color: #DBB419;
+                }
+
+                &:hover {
+                    font-size: 1.35rem;
+
+                    .bold {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+    }
+}

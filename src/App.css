@@ -28,3 +28,26 @@ body,
 .button:hover {
   background-color: #C59F19;
 }
+
+.error {
+  border: 1px solid #FD0100;
+  color: #FD0100;
+  background-color: rgb(253, 233, 233);
+}
+
+.error-container {
+  position: relative;
+}
+
+.error-message {
+  color: #FD0100;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}

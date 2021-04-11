@@ -1,0 +1,63 @@
+.page-container {
+    .main-heading{
+        text-align: center;
+        padding: 1rem 0 5rem;
+    }
+
+    .stocks {
+        margin: auto;
+        box-shadow: 5px 5px 20px 10px rgba(50, 50, 50, 0.15);
+        border-radius: 1rem;
+        border-collapse: collapse;
+        overflow: hidden;
+
+        .heading, .foot {
+            background-color: #C59F19;
+            color: white;
+            text-align: center;
+
+            .cell {
+                padding: 1rem;
+                font-weight: bold;
+            }
+        }
+
+        .body {
+            text-align: center;
+
+            .line {
+                .cell {
+                    padding: 1rem;
+
+                    &.btn svg {
+                        cursor: pointer;
+                        color: #C59F19;
+                        width: 1.25rem;
+
+                        &:hover {
+                            color: #ebbe1e;
+                        }
+                    }
+                }
+            }
+
+            .line:nth-of-type(even) {
+                background-color: #faf9f6;
+                color: #C59F19;
+                font-weight: bold;
+            }
+
+            .line:nth-of-type(odd) {
+                background-color: #ede8d8;
+            }
+        }
+
+        .foot {
+            .select-currency {
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                background-color: #faf9f6;
+            }
+        }
+    }
+}
