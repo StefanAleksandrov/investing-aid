@@ -11,9 +11,10 @@ function isAuth (WrappedComponent) {
         if (!currentUser.uid) {
             history.push('/sign-in');
             return null;
+
+        } else {
+            return <WrappedComponent {...props} />;
         }
-        
-        return <WrappedComponent {...props} />;
     }
 
     return Component;

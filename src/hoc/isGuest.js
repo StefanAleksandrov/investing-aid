@@ -7,13 +7,14 @@ function isGuest (WrappedComponent) {
     function Component (props) {
         const currentUser = useContext(AuthContext)[0];
         const history = useHistory();
-        
+
         if (currentUser.uid) {
             history.push('/');
             return null;
+            
+        } else {
+            return <WrappedComponent {...props} />;
         }
-        
-        return <WrappedComponent {...props} />;
     }
 
     return Component;
