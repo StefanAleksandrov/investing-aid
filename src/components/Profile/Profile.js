@@ -68,8 +68,8 @@ export default function Profile () {
                 </div>
 
                 <div className="col-50">
-                    <p>Average number of stocks in a company: <span className="bold" >{stocks.averageStocksCompany}</span></p>
-                    <p>Average price per stock: <span className="bold" >{stocks.averageStockPrice} USD</span></p>
+                    <p>Average number of stocks in a company: <span className="bold" >{stocks.averageStocksCompany !== "NaN" ? stocks.averageStocksCompany : 0}</span></p>
+                    <p>Average price per stock: <span className="bold" >{stocks.averageStockPrice !== 'NaN' ? stocks.averageStockPrice : 0} USD</span></p>
                 </div>
             </div>
         </div>
