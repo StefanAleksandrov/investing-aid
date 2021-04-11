@@ -69,7 +69,7 @@ export default function MyInvestments({ history }) {
     return (
         <div className="page-container">
             { records.length < 1
-                    ? <h1 className="main-heading" >No records yet. <Link to='/add-record'>Add one</Link> now!</h1>
+                    ? <h1 className="main-heading" >No records yet. <Link to='/add-investment'>Add one</Link> now!</h1>
                     : (
                         <>
                             <h1 className="main-heading" >Your Investment records</h1>
