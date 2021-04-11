@@ -78,7 +78,7 @@ export default function SignIn () {
                         <input type="submit" className="button" value="Login" />
                     </label>
 
-                    <p>Don't have an account yet? <NavLink to='/sign-up'>Sign up here!</NavLink></p>
+                    <p>Don't have an account yet? <NavLink to='/sign-up'>Sign up</NavLink> now!</p>
                 </form>
             </div>
         </main>

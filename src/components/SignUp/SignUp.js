@@ -86,7 +86,7 @@ export default function SignUp({
                         <input type="submit" className="button" value="Register" />
                     </label>
 
-                    <p>Already have an account? <NavLink to='/sign-in'>Login here!</NavLink></p>
+                    <p>Already have an account? <NavLink to='/sign-in'>Sign in</NavLink> now!</p>
                 </form>
             </div>
         </main>
