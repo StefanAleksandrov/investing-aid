@@ -9,6 +9,7 @@ import Home from './components/Home/Home';
 import AboutUs from './components/AboutUs/AboutUs';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
+import Profile from './components/Profile/Profile';
 import MyInvestments from './components/MyInvestments/MyInvestments';
 import AddInvestment from './components/AddInvestment/AddInvestment';
 import CurrencyRates from './components/CurrencyRates/CurrencyRates';
@@ -74,6 +75,7 @@ export default function App() {
               <Route path='/about-us' exact={true} component={isGuest(AboutUs)} />
               <Route path='/sign-up' exact={true} component={SignUp} />
               <Route path='/sign-in' exact={true} component={SignIn} />
+              <Route path='/profile' exact={true} component={Profile} />
               <Route path='/my-investments' exact={true} component={MyInvestments} />
               <Route path='/add-investment' exact={true} key="add" component={AddInvestment} />
               <Route path='/edit/:id' exact={true} key="edit" component={AddInvestment} />
